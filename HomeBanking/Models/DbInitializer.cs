@@ -23,24 +23,6 @@ namespace HomeBanking.Models
 
                 context.SaveChanges();
             }
-
-            if (!context.Accounts.Any())
-            {
-                var accountGonzalo = context.Clients.FirstOrDefault(c => c.Email == "gonzalocoradello@gmail.com");
-                if (accountGonzalo != null)
-                {
-                    var accounts = new Account[]
-                    {
-                        new Account { ClientId = accountGonzalo.Id, CreationDate = DateTime.Now, Number = string.Empty, Balance = 0 }
-                    };
-
-                    foreach (Account account in accounts) 
-                    {
-                        context.Accounts.Add(account);
-                    }
-                    context.SaveChanges();
-                 }
-            }
         }
     }
 }
