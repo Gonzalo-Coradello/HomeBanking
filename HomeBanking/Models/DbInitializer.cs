@@ -13,7 +13,7 @@ namespace HomeBanking.Models
                 {
                     new Client { FirstName = "Gonzalo", LastName = "Coradello", Email = "gonzalocoradello@gmail.com", Password = "123456" },
                     new Client { FirstName = "Eduardo", LastName = "Mendoza", Email = "eduardo@gmail.com", Password = "123456" },
-                    new Client { FirstName = "Victor", LastName = "Coronado", Email = "victor@gmail.com", Password = "123456" }
+                    new Client { FirstName = "Victor", LastName = "Coronado", Email = "vcoronado@gmail.com", Password = "123456" }
                 };
 
                 foreach(Client client in clients)
@@ -26,12 +26,12 @@ namespace HomeBanking.Models
 
             if (!context.Accounts.Any())
             {
-                var accountGonzalo = context.Clients.FirstOrDefault(c => c.Email == "gonzalocoradello@gmail.com");
-                if (accountGonzalo != null)
+                var clientGonzalo = context.Clients.FirstOrDefault(c => c.Email == "gonzalocoradello@gmail.com");
+                if (clientGonzalo != null)
                 {
                     var accounts = new Account[]
                     {
-                        new Account { ClientId = accountGonzalo.Id, CreationDate = DateTime.Now, Number = string.Empty, Balance = 0 }
+                        new Account { ClientId = clientGonzalo.Id, CreationDate = DateTime.Now, Number = string.Empty, Balance = 0 }
                     };
 
                     foreach (Account account in accounts) 
@@ -40,6 +40,21 @@ namespace HomeBanking.Models
                     }
                     context.SaveChanges();
                  }
+
+                var clientVictor = context.Clients.FirstOrDefault(c => c.Email == "vcoronado@gmail.com");
+                if (clientVictor != null)
+                {
+                    var accounts = new Account[]
+                    {
+                        new Account { ClientId = clientVictor.Id, CreationDate = DateTime.Now, Number = "VIN001", Balance = 0 }
+                    };
+
+                    foreach (Account account in accounts)
+                    {
+                        context.Accounts.Add(account);
+                    }
+                    context.SaveChanges();
+                }
             }
         }
     }
