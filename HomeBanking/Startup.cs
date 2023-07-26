@@ -52,6 +52,7 @@ namespace HomeBanking
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
                 endpoints.MapRazorPages();
             });
         }

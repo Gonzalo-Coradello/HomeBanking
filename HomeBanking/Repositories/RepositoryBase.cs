@@ -17,8 +17,18 @@ namespace HomeBanking.Repositories
 
         public IQueryable<T> FindAll()
         {
-            //return this.RepositoryContext.Set<T>().AsNoTracking();
             return this.RepositoryContext.Set<T>().AsNoTrackingWithIdentityResolution();
+        }
+        public IQueryable<T> FindAll(Func<IQueryable<T>, IIncludableQueryable<T, object>> includes = null)
+        {
+            IQueryable<T> queryable = this.RepositoryContext.Set<T>();
+            
+            
+            if (includes != null)
+            {
+                queryable = includes(queryable);
+            }
+            return queryable.AsNoTrackingWithIdentityResolution();
         }
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
@@ -43,11 +53,6 @@ namespace HomeBanking.Repositories
         public void SaveChanges()
         {
             this.RepositoryContext.SaveChanges();
-        }
-
-        public IQueryable<T> FindAll(Func<IQueryable<T>, IIncludableQueryable<T, object>> includes = null)
-        {
-            throw new NotImplementedException();
         }
     }
 }
