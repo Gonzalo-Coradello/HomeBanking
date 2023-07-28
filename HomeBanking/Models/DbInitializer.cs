@@ -31,7 +31,7 @@ namespace HomeBanking.Models
                 {
                     var accounts = new Account[]
                     {
-                        new Account { ClientId = clientGonzalo.Id, CreationDate = DateTime.Now, Number = string.Empty, Balance = 0 }
+                        new Account { ClientId = clientGonzalo.Id, CreationDate = DateTime.Now, Number = "VIN002", Balance = 0 }
                     };
 
                     foreach (Account account in accounts) 
