@@ -11,9 +11,9 @@ namespace HomeBanking.Models
             {
                 var clients = new Client[]
                 {
-                    new Client { FirstName = "Gonzalo", LastName = "Coradello", Email = "gonzalocoradello@gmail.com", Password = "123456" },
+                    new Client { FirstName = "Victor", LastName = "Coronado", Email = "vcoronado@gmail.com", Password = "123456" },
                     new Client { FirstName = "Eduardo", LastName = "Mendoza", Email = "eduardo@gmail.com", Password = "123456" },
-                    new Client { FirstName = "Victor", LastName = "Coronado", Email = "vcoronado@gmail.com", Password = "123456" }
+                    new Client { FirstName = "Gonzalo", LastName = "Coradello", Email = "gonzalocoradello@gmail.com", Password = "123456" }
                 };
 
                 foreach(Client client in clients)
@@ -26,27 +26,42 @@ namespace HomeBanking.Models
 
             if (!context.Accounts.Any())
             {
-                var clientGonzalo = context.Clients.FirstOrDefault(c => c.Email == "gonzalocoradello@gmail.com");
-                if (clientGonzalo != null)
-                {
-                    var accounts = new Account[]
-                    {
-                        new Account { ClientId = clientGonzalo.Id, CreationDate = DateTime.Now, Number = "VIN002", Balance = 0 }
-                    };
-
-                    foreach (Account account in accounts) 
-                    {
-                        context.Accounts.Add(account);
-                    }
-                    context.SaveChanges();
-                 }
-
                 var clientVictor = context.Clients.FirstOrDefault(c => c.Email == "vcoronado@gmail.com");
                 if (clientVictor != null)
                 {
                     var accounts = new Account[]
                     {
-                        new Account { ClientId = clientVictor.Id, CreationDate = DateTime.Now, Number = "VIN001", Balance = 0 }
+                        new Account { ClientId = clientVictor.Id, CreationDate = DateTime.Now, Number = "VIN001", Balance = 5000 }
+                    };
+
+                    foreach (Account account in accounts)
+                    {
+                        context.Accounts.Add(account);
+                    }
+                    context.SaveChanges();
+                }
+
+                var clientEduardo = context.Clients.FirstOrDefault(c => c.Email == "eduardo@gmail.com");
+                if (clientEduardo != null)
+                {
+                    var accounts = new Account[]
+                    {
+                        new Account { ClientId = clientEduardo.Id, CreationDate = DateTime.Now, Number = "VIN002", Balance = 10000 }
+                    };
+
+                    foreach (Account account in accounts)
+                    {
+                        context.Accounts.Add(account);
+                    }
+                    context.SaveChanges();
+                }
+
+                var clientGonzalo = context.Clients.FirstOrDefault(c => c.Email == "gonzalocoradello@gmail.com");
+                if (clientGonzalo != null)
+                {
+                    var accounts = new Account[]
+                    {
+                        new Account { ClientId = clientGonzalo.Id, CreationDate = DateTime.Now, Number = "VIN003", Balance = 10000 }
                     };
 
                     foreach (Account account in accounts)
