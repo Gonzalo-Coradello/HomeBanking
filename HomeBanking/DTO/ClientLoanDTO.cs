@@ -1,4 +1,4 @@
-﻿namespace HomeBanking.Models
+﻿namespace HomeBanking.DTO
 {
     public class ClientLoanDTO
     {
