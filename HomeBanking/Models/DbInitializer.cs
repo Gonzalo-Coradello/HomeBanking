@@ -31,7 +31,7 @@ namespace HomeBanking.Models
                 {
                     var accounts = new Account[]
                     {
-                        new Account { ClientId = clientVictor.Id, CreationDate = DateTime.Now, Number = "VIN001", Balance = 5000 }
+                        new Account { ClientId = clientVictor.Id, CreationDate = DateTime.Now, Number = "VIN-001", Balance = 5000 }
                     };
 
                     foreach (Account account in accounts)
@@ -46,7 +46,7 @@ namespace HomeBanking.Models
                 {
                     var accounts = new Account[]
                     {
-                        new Account { ClientId = clientEduardo.Id, CreationDate = DateTime.Now, Number = "VIN002", Balance = 10000 }
+                        new Account { ClientId = clientEduardo.Id, CreationDate = DateTime.Now, Number = "VIN-002", Balance = 10000 }
                     };
 
                     foreach (Account account in accounts)
@@ -61,7 +61,7 @@ namespace HomeBanking.Models
                 {
                     var accounts = new Account[]
                     {
-                        new Account { ClientId = clientGonzalo.Id, CreationDate = DateTime.Now, Number = "VIN003", Balance = 10000 }
+                        new Account { ClientId = clientGonzalo.Id, CreationDate = DateTime.Now, Number = "VIN-003", Balance = 10000 }
                     };
 
                     foreach (Account account in accounts)

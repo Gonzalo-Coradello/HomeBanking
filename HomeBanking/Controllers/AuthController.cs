@@ -15,7 +15,7 @@ namespace HomeBanking.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private IClientRepository _clientRepository;
+        private readonly IClientRepository _clientRepository;
         public AuthController(IClientRepository clientRepository)
         {
             _clientRepository = clientRepository;
