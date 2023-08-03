@@ -139,14 +139,14 @@ namespace HomeBanking.Controllers
                
                 if (email == string.Empty)
                 {
-                    return Forbid();
+                    return StatusCode(StatusCodes.Status403Forbidden);
                 }
 
                 Client client = _clientRepository.FindByEmail(email);
 
                 if (client == null)
                 {
-                    return Forbid();
+                    return StatusCode(StatusCodes.Status403Forbidden);
                 }
 
                 var clientDTO = new ClientDTO
