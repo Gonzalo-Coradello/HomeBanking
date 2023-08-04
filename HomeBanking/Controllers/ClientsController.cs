@@ -135,18 +135,18 @@ namespace HomeBanking.Controllers
         {
             try
             {
-                string email = User.FindFirst("Client") != null ? User.FindFirst("Client").Value : string.Empty;
-               
+                string email = User.FindFirst("Client") != null ? User.FindFirst("Client").Value : String.Empty;
+
                 if (email == string.Empty)
                 {
-                    return StatusCode(StatusCodes.Status403Forbidden);
+                    return Forbid("Email vacío.");
                 }
 
                 Client client = _clientRepository.FindByEmail(email);
 
                 if (client == null)
                 {
-                    return StatusCode(StatusCodes.Status403Forbidden);
+                    return Forbid("No existe el cliente.");
                 }
 
                 var clientDTO = new ClientDTO

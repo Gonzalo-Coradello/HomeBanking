@@ -99,19 +99,19 @@ namespace HomeBanking.Controllers
 
                 if (email == string.Empty)
                 {
-                    return StatusCode(StatusCodes.Status403Forbidden);
+                    return Forbid("Email vacío.");
                 }
 
-                Client client  = _clientRepository.FindByEmail(email);
+                Client client = _clientRepository.FindByEmail(email);
 
                 if (client == null)
                 {
-                    return StatusCode(StatusCodes.Status403Forbidden);
+                    return Forbid("No existe el cliente.");
                 }
 
                 if (client.Accounts.Count == 3)
                 {
-                    return StatusCode(StatusCodes.Status403Forbidden);
+                    return Forbid("Ha alcanzado el número máximo de cuentas.");
                 }
 
                 Random random = new();
