@@ -29,6 +29,19 @@ namespace HomeBanking
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    policy =>
+                    {
+                        policy
+                            .WithOrigins("http://localhost:4200, localhost:4200")
+                            .AllowAnyMethod()
+                            .AllowCredentials()
+                            .SetIsOriginAllowed((host) => true)
+                            .AllowAnyHeader();
+                    });
+            });
             services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
             services.AddDbContext<HomeBankingContext>(options => options.UseSqlServer(Configuration.GetConnectionString("HomeBankingConnection")));
             services.AddScoped<IClientRepository, ClientRepository>();
@@ -61,6 +74,8 @@ namespace HomeBanking
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseCors("CorsPolicy");
 
             app.UseAuthentication();
 
