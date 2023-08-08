@@ -3,7 +3,6 @@ using HomeBanking.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Drawing;
 
 namespace HomeBanking.Controllers
 {
@@ -60,7 +59,8 @@ namespace HomeBanking.Controllers
                 _cardRepository.Save(newCard);
 
                 return Ok(newCard);
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);
             }
