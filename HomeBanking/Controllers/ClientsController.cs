@@ -14,10 +14,12 @@ namespace HomeBanking.Controllers
     public class ClientsController : ControllerBase
     {
         private readonly IClientRepository _clientRepository;
+        private readonly IAccountRepository _accountRepository;
 
-        public ClientsController(IClientRepository clientRepository)
+        public ClientsController(IClientRepository clientRepository, IAccountRepository accountRepository)
         {
             _clientRepository = clientRepository;
+            _accountRepository = accountRepository;
         }
 
         [HttpGet]
@@ -218,6 +220,21 @@ namespace HomeBanking.Controllers
                 };
 
                 _clientRepository.Save(newClient);
+
+                var createdClient = _clientRepository.FindByEmail(newClient.Email);
+
+                Random random = new();
+
+                var account = new Account
+                {
+                    Number = "VIN-" + random.Next(0, 99999999).ToString(),
+                    Balance = 0,
+                    ClientId = createdClient.Id,
+                    CreationDate = DateTime.Now,
+                };
+
+                _accountRepository.Save(account);
+
                 return Created("", newClient);
 
             } catch (Exception ex)
