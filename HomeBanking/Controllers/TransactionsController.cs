@@ -1,6 +1,7 @@
 ﻿using HomeBanking.DTO;
 using HomeBanking.Models;
 using HomeBanking.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -24,6 +25,7 @@ namespace HomeBanking.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Post([FromBody] TransferDTO transferDTO)
         {
             try
@@ -99,7 +101,7 @@ namespace HomeBanking.Controllers
                 toAccount.Balance = toAccount.Balance + transferDTO.Amount;
                 _accountRepository.Save(toAccount);
 
-                return Created("Creado con éxito", fromAccount);
+                return Created("", fromAccount);
 
             } catch (Exception ex)
             {
