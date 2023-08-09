@@ -99,26 +99,26 @@ namespace HomeBanking.Controllers
 
                 if (email == string.Empty)
                 {
-                    return Forbid("Email vacío.");
+                    return StatusCode(403, "Email vacío.");
                 }
 
                 Client client = _clientRepository.FindByEmail(email);
 
                 if (client == null)
                 {
-                    return Forbid("No existe el cliente.");
+                    return StatusCode(403, "No existe el cliente.");
                 }
 
                 if (client.Accounts.Count == 3)
                 {
-                    return Forbid("Ha alcanzado el número máximo de cuentas.");
+                    return StatusCode(403, "Ha alcanzado el número máximo de cuentas.");
                 }
 
                 Random random = new();
 
                 var account = new Account
                 {
-                    Number = "VIN-" + random.Next(0, 99999999).ToString(),
+                    Number = "VIN-" + random.Next(10000000, 99999999).ToString(),
                     Balance = 0,
                     ClientId = client.Id,
                     CreationDate = DateTime.Now,

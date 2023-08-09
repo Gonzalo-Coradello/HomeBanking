@@ -141,14 +141,14 @@ namespace HomeBanking.Controllers
 
                 if (email == string.Empty)
                 {
-                    return Forbid("Email vacío.");
+                    return StatusCode(403, "Email vacío.");
                 }
 
                 Client client = _clientRepository.FindByEmail(email);
 
                 if (client == null)
                 {
-                    return Forbid("No existe el cliente.");
+                    return StatusCode(403, "No existe el cliente.");
                 }
 
                 var clientDTO = new ClientDTO

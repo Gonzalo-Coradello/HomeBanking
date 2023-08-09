@@ -3,6 +3,7 @@ using HomeBanking.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 
 namespace HomeBanking.Controllers
 {
@@ -28,14 +29,19 @@ namespace HomeBanking.Controllers
 
                 if (email == string.Empty)
                 {
-                    return Forbid("Email vacío.");
+                    return StatusCode(403, "Email vacío.");
                 }
 
                 Client client = _clientRepository.FindByEmail(email);
 
                 if (client == null)
                 {
-                    return Forbid("No existe el cliente.");
+                    return StatusCode(403, "No existe el cliente.");
+                }
+
+                if (client.Cards.Where(c => c.Type == card.Type).Count() >= 3)
+                {
+                    return StatusCode(403, "No se pueden crear más de tres tarjetas de cada tipo.");
                 }
 
                 Random random = new();

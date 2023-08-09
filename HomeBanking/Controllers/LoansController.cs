@@ -62,51 +62,51 @@ namespace HomeBanking.Controllers
 
                 if (email == string.Empty)
                 {
-                    return Forbid("Email vacío.");
+                    return StatusCode(403, "Email vacío.");
                 }
 
                 Client client = _clientRepository.FindByEmail(email);
 
                 if (client == null)
                 {
-                    return Forbid("No existe el cliente.");
+                    return StatusCode(403, "No existe el cliente.");
                 }
 
                 var loan = _loanRepository.FindById(application.LoanId);
                 if (loan == null)
                 {
-                    return Forbid("El préstamo no existe");
+                    return StatusCode(403, "El préstamo no existe");
                 }
 
                 if (application.Amount <= 0)
                 {
-                    return Forbid("El monto debe ser mayor a cero.");
+                    return StatusCode(403, "El monto debe ser mayor a cero.");
                 }
 
                 if (application.Amount > loan.MaxAmount)
                 {
-                    return Forbid("El monto seleccionado sobrepasa el monto máximo del préstamo.");
+                    return StatusCode(403, "El monto seleccionado sobrepasa el monto máximo del préstamo.");
                 }
 
                 if (application.Payments == string.Empty || application.Payments == "0")
                 {
-                    return Forbid("Debe seleccionar la cantidad de cuotas.");
+                    return StatusCode(403, "Debe seleccionar la cantidad de cuotas.");
                 }
 
                 if (!loan.Payments.Split(",").Any(payment => payment == application.Payments))
                 {
-                    return Forbid("Seleccione un número de cuotas válido.");
+                    return StatusCode(403, "Seleccione un número de cuotas válido.");
                 }
 
                 var account = _accountRepository.FindByNumber(application.ToAccountNumber);
                 if (account == null)
                 {
-                    return Forbid("No se encontró la cuenta.");
+                    return StatusCode(403, "No se encontró la cuenta.");
                 }
 
                 if (!client.Accounts.Any(acc => acc.Number == application.ToAccountNumber))
                 {
-                    return Forbid("La cuenta seleccionada no pertenece al cliente actual.");
+                    return StatusCode(403, "La cuenta seleccionada no pertenece al cliente actual.");
                 }
 
                 var clientLoan = new ClientLoan
