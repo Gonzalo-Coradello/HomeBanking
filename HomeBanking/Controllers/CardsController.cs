@@ -29,19 +29,29 @@ namespace HomeBanking.Controllers
 
                 if (email == string.Empty)
                 {
-                    return StatusCode(403, "Email vacío.");
+                    return StatusCode(403, "Email is empty");
                 }
 
                 Client client = _clientRepository.FindByEmail(email);
 
                 if (client == null)
                 {
-                    return StatusCode(403, "No existe el cliente.");
+                    return StatusCode(403, "Client does not exist");
+                }
+
+                if (card.Type != CardType.DEBIT.ToString() && card.Type != CardType.CREDIT.ToString())
+                {
+                    return StatusCode(403, "Invalid card type");
+                }
+
+                if (card.Color != CardColor.SILVER.ToString() && card.Color != CardColor.GOLD.ToString() && card.Color != CardColor.TITANIUM.ToString())
+                {
+                    return StatusCode(403, "Invalid card color");
                 }
 
                 if (client.Cards.Where(c => c.Type == card.Type).Count() >= 3)
                 {
-                    return StatusCode(403, "No se pueden crear más de tres tarjetas de cada tipo.");
+                    return StatusCode(403, "You can't have more than three credit or debit cards");
                 }
 
                 Random random = new();

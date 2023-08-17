@@ -62,51 +62,51 @@ namespace HomeBanking.Controllers
 
                 if (email == string.Empty)
                 {
-                    return StatusCode(403, "Email vacío.");
+                    return StatusCode(403, "Email is empty");
                 }
 
                 Client client = _clientRepository.FindByEmail(email);
 
                 if (client == null)
                 {
-                    return StatusCode(403, "No existe el cliente.");
+                    return StatusCode(403, "Client does not exist");
                 }
 
                 var loan = _loanRepository.FindById(application.LoanId);
                 if (loan == null)
                 {
-                    return StatusCode(403, "El préstamo no existe");
+                    return StatusCode(403, "Loan does not exist");
                 }
 
                 if (application.Amount <= 0)
                 {
-                    return StatusCode(403, "El monto debe ser mayor a cero.");
+                    return StatusCode(403, "Amount should be greater than 0");
                 }
 
                 if (application.Amount > loan.MaxAmount)
                 {
-                    return StatusCode(403, "El monto seleccionado sobrepasa el monto máximo del préstamo.");
+                    return StatusCode(403, "Selected amount exceeds loan's maximum amount");
                 }
 
                 if (application.Payments == string.Empty || application.Payments == "0")
                 {
-                    return StatusCode(403, "Debe seleccionar la cantidad de cuotas.");
+                    return StatusCode(403, "You must select the number of payments");
                 }
 
                 if (!loan.Payments.Split(",").Any(payment => payment == application.Payments))
                 {
-                    return StatusCode(403, "Seleccione un número de cuotas válido.");
+                    return StatusCode(403, "Select a valid number of payments");
                 }
 
                 var account = _accountRepository.FindByNumber(application.ToAccountNumber);
                 if (account == null)
                 {
-                    return StatusCode(403, "No se encontró la cuenta.");
+                    return StatusCode(403, "Account was not found");
                 }
 
                 if (!client.Accounts.Any(acc => acc.Number == application.ToAccountNumber))
                 {
-                    return StatusCode(403, "La cuenta seleccionada no pertenece al cliente actual.");
+                    return StatusCode(403, "Selected account does not belong to the current user");
                 }
 
                 var clientLoan = new ClientLoan

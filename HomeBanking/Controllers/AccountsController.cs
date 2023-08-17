@@ -99,19 +99,19 @@ namespace HomeBanking.Controllers
 
                 if (email == string.Empty)
                 {
-                    return StatusCode(403, "Email vacío.");
+                    return StatusCode(403, "Email is empty");
                 }
 
                 Client client = _clientRepository.FindByEmail(email);
 
                 if (client == null)
                 {
-                    return StatusCode(403, "No existe el cliente.");
+                    return StatusCode(403, "Client does not exist");
                 }
 
                 if (client.Accounts.Count == 3)
                 {
-                    return StatusCode(403, "Ha alcanzado el número máximo de cuentas.");
+                    return StatusCode(403, "You have reached the maximum amount of accounts");
                 }
 
                 Random random = new();

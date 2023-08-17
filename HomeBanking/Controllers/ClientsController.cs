@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace HomeBanking.Controllers
 {
@@ -141,14 +142,14 @@ namespace HomeBanking.Controllers
 
                 if (email == string.Empty)
                 {
-                    return StatusCode(403, "Email vacío.");
+                    return StatusCode(403, "Email is empty");
                 }
 
                 Client client = _clientRepository.FindByEmail(email);
 
                 if (client == null)
                 {
-                    return StatusCode(403, "No existe el cliente.");
+                    return StatusCode(403, "Client does not exist");
                 }
 
                 var clientDTO = new ClientDTO
@@ -196,19 +197,43 @@ namespace HomeBanking.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Client client)
         {
+            string namePattern = @"^[a-zA-Z\s]{3,}$";
+            string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            string passwordPattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$";
+
             try
             {
                 if (String.IsNullOrEmpty(client.Email) ||
                     String.IsNullOrEmpty(client.Password) ||
                     String.IsNullOrEmpty(client.FirstName) ||
                     String.IsNullOrEmpty(client.LastName))
-                    return StatusCode(403, "Datos inválidos");
+                    return StatusCode(403, "Fields cannot be empty");
+
+                if(!Regex.IsMatch(client.FirstName, namePattern, RegexOptions.IgnoreCase))
+                {
+                    return StatusCode(403, "Invalid first name format");
+                }
+
+                if (!Regex.IsMatch(client.LastName, namePattern, RegexOptions.IgnoreCase))
+                {
+                    return StatusCode(403, "Invalid last name format");
+                }
+
+                if (!Regex.IsMatch(client.Email, emailPattern, RegexOptions.IgnoreCase))
+                {
+                    return StatusCode(403, "Invalid email");
+                }
+
+                if (!Regex.IsMatch(client.Password, passwordPattern))
+                {
+                    return StatusCode(403, "Invalid password");
+                }
 
                 Client user = _clientRepository.FindByEmail(client.Email);
 
                 if (user != null)
                 {
-                    return StatusCode(403, "El email está en uso");
+                    return StatusCode(403, "Email is already in use");
                 }
 
                 Client newClient = new Client
