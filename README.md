@@ -26,13 +26,13 @@ _[es]_ Aplicación de Home Banking desarrollada con ASP.NET, C#, Entity Framewor
 
 ## Screeenshots
 
-![](https://github.com/Gonzalo-Coradello/HomeBanking/blob/main/screenshots/1.jpg)
-![](https://github.com/Gonzalo-Coradello/HomeBanking/blob/main/screenshots/3.jpg)
-![](https://github.com/Gonzalo-Coradello/HomeBanking/blob/main/screenshots/4.jpg)
-![](https://github.com/Gonzalo-Coradello/HomeBanking/blob/main/screenshots/5.jpg)
-![](https://github.com/Gonzalo-Coradello/HomeBanking/blob/main/screenshots/6.jpg)
-![](https://github.com/Gonzalo-Coradello/HomeBanking/blob/main/screenshots/7.jpg)
-![](https://github.com/Gonzalo-Coradello/HomeBanking/blob/main/screenshots/8.jpg)
-![](https://github.com/Gonzalo-Coradello/HomeBanking/blob/main/screenshots/9.jpg)
-![](https://github.com/Gonzalo-Coradello/HomeBanking/blob/main/screenshots/10.jpg)
-![](https://github.com/Gonzalo-Coradello/HomeBanking/blob/main/screenshots/11.jpg)
+![](https://github.com/Gonzalo-Coradello/HomeBanking/blob/master/screenshots/1.png)
+![](https://github.com/Gonzalo-Coradello/HomeBanking/blob/master/screenshots/3.png)
+![](https://github.com/Gonzalo-Coradello/HomeBanking/blob/master/screenshots/4.png)
+![](https://github.com/Gonzalo-Coradello/HomeBanking/blob/master/screenshots/5.jpg)
+![](https://github.com/Gonzalo-Coradello/HomeBanking/blob/master/screenshots/6.png)
+![](https://github.com/Gonzalo-Coradello/HomeBanking/blob/master/screenshots/7.png)
+![](https://github.com/Gonzalo-Coradello/HomeBanking/blob/master/screenshots/8.jpg)
+![](https://github.com/Gonzalo-Coradello/HomeBanking/blob/master/screenshots/9.png)
+![](https://github.com/Gonzalo-Coradello/HomeBanking/blob/master/screenshots/10.png)
+![](https://github.com/Gonzalo-Coradello/HomeBanking/blob/master/screenshots/11.png)
